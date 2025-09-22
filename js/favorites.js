@@ -1,0 +1,1 @@
+//Manage favorites with localStorage
