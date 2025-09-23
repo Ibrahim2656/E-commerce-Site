@@ -1,0 +1,37 @@
+/* Typography */
+/*
+fontfamily: Poppins,sans-serif
+font-weight:600/700 ---> titles
+font-weight:400 ---> Body
+small-text:0.9 rem  
+ */
+/* Color Style */
+/*
+Background: Light (#F2F2F2 or #FBFBFB).
+
+Cards / Sections: White (#FFFFFF) with subtle shadow.
+
+Text: Mostly dark (#000000, #333333), gray (#666666) for secondary info.
+
+Buttons: Black background (#000000) with white text — hover: lighter shade (#333333).
+
+Navbar/Footer: Dark (#000000 or #333333) with light text.
+ */
+:root{
+    --black-900:#000;
+    --black-800:#333;
+    --black-700:#4D4D4D;
+    --black-600:#666;
+    --black-500:#808080;
+    --black-400:#999;
+    --black-300:#B3B3B3;
+    --black-200:#CCCCCC;
+    --black-100:#E6E6E6;
+    --black-50:#F2F2F2;
+    --black-25:#FBFBFB;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
