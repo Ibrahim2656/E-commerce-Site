@@ -1,11 +1,14 @@
-/* Typography */
+/*---------------------------- Typography ----------------------------*/
+
 /*
 fontfamily: Poppins,sans-serif
 font-weight:600/700 ---> titles
 font-weight:400 ---> Body
 small-text:0.9 rem  
  */
-/* Color Style */
+
+/* ---------------------- Color Style ---------------------------- */
+
 /*
 Background: Light (#F2F2F2 or #FBFBFB).
 
@@ -30,8 +33,119 @@ Navbar/Footer: Dark (#000000 or #333333) with light text.
     --black-50:#F2F2F2;
     --black-25:#FBFBFB;
 }
+/* -------------------------- BASE -------------------------- */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+html{
+    font-size: 10px;
+}
+body{
+    color: var(--black-900);
+    font-family: 'Poppins',sans-serif;
+    background-color: var(--black-25);
+}
+a{
+    text-decoration: none;
+    
+}
+li{
+    list-style  : none;
+}
+.container{
+    margin: 0 auto;
+    width: 90%;
+}
+
+
+
+
+
+
+/* ----------------------------- SECTIONS ----------------------------- */
+
+/* -------------- Navbar Section ------------ */
+header{
+    background-color: var(--black-50);
+    padding: 1rem 7rem;
+    
+}
+.nav-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar-left{
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+.navbar-left .logo a{
+    font-weight: 700;
+    color: var(--black-800);
+    font-size: 2rem;
+}
+.nav-links ul{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.nav-links a{
+    color: var(--black-800);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    transition: background 0.3s;
+    border-radius: 2rem;
+}
+.nav-links a:hover{
+    background-color: var(--black-100);
+}
+.navbar-right{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+
+}
+.navbar-search{
+    background-color: var(--black-100) ;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+.navbar-search input{
+    flex: 1;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    background-color :var(--black-100);
+    min-width: 40rem;
+}
+.navbar-search input:focus{
+    outline: none;
+}
+.navbar-search img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.icons ul{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.icons img {
+    width: 2rem;
+    height: 2rem;
+}
+
+
+
+/* ----------------------------- HERO SECTION ----------------------------- */
+/* .hero-section{
+
+
+} */
