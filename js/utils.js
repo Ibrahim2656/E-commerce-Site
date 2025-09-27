@@ -1,1 +1,1 @@
-// Helper functions (e.g., localStorage wrapper)
+// LocalStorage helpers

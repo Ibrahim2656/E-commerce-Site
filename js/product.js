@@ -1,1 +1,0 @@
-//Render products, filtering, search
