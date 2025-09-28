@@ -45,6 +45,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="btn-add-to-cart">Add to Cart</button>
         </div>
       `;
+      
+      card.addEventListener("click", (e) => {
+      if (e.target.closest(".btn-add-to-cart") || e.target.closest(".btn-favorite")) return;
+      window.location.href = `product.html?id=${product.id}`;
+    });
 
       container.appendChild(card);
     });
@@ -53,3 +58,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     container.innerHTML = `<p>Error loading products. See console.</p>`;
   }
 });
+
+

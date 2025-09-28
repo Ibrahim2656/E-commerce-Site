@@ -34,13 +34,15 @@
             <ul>
               <li>
                 <a href="favorites.html"
-                  ><img src="./assets/icons/fav.png" alt="My Favorites"
-                /></a>
+                  ><img src="./assets/icons/fav.png" alt="My Favorites"/>
+                  <span id="fav-count" class="badge-count">0</span>
+                </a>
               </li>
               <li>
                 <a href="cart.html"
-                  ><img src="./assets/icons/cart.png" alt="Cart"
-                /></a>
+                  ><img src="./assets/icons/cart.png" alt="Cart"/>
+                  <span id="cart-counter" class="counter">0</span>
+              </a>
               </li>
             </ul>
           </div>
@@ -165,6 +167,7 @@
         </div>
       </div>
     </section>
+    <div id="toast" class="toast">Item added to cart</div>
     <script type="module" src="js/products.js"></script>
     <script type="module" src="js/utils.js"></script>
   </body>
