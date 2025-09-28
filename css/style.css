@@ -81,6 +81,9 @@ ul,
 li {
   list-style: none;
 }
+span{
+  font-weight: 600;
+}
 /* ----------------------------- SECTIONS ----------------------------- */
 
 /* -------------- Navbar Section ------------ */
@@ -506,3 +509,217 @@ header {
     display: none;
   }
 }
+/* ---------------- PRODUCT PAGE ---------------- */
+/* ---------------- PRODUCT PAGE ---------------- */
+.product-page {
+  display: flex;
+  gap: 4rem;
+  margin: 4rem 10%;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 3rem;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.product-page-images {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.product-page-main-img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 0.8rem;
+  background: var(--black-25);
+  padding: 1rem;
+}
+
+.product-page-thumbs {
+  display: flex;
+  gap: 1rem;
+}
+
+.product-page-thumbs img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  background: var(--black-50);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.product-page-thumbs img:hover {
+  transform: scale(1.05);
+}
+
+.product-page-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.product-page-info h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--black-900);
+}
+
+.product-page-category {
+  font-size: 1.4rem;
+  color: var(--black-600);
+}
+
+.product-page-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.6rem;
+  color: #ffc107;
+}
+
+.product-page-rating .rating-value {
+  color: var(--black-600);
+  font-size: 1.4rem;
+}
+
+.product-page-price {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--black-900);
+}
+
+.product-page-info p {
+  font-size: 1.5rem;
+  color: var(--black-700);
+  line-height: 1.6;
+}
+
+.product-page-extra {
+  font-size: 1.4rem;
+  color: var(--black-700);
+  margin-top: 1rem;
+}
+
+.product-page-extra li {
+  margin-bottom: 0.5rem;
+}
+
+.product-page-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.product-page-actions .btn-add-to-cart {
+  flex: 1;
+  background: var(--black-900);
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-page-actions .btn-add-to-cart:hover {
+  background: var(--black-800);
+  transform: translateY(-2px);
+}
+
+.product-page-actions .btn-favorite {
+  background: #fff;
+  border: 1px solid var(--black-200);
+  border-radius: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-page-actions .btn-favorite img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.product-page-actions .btn-favorite:hover,
+.product-page-actions .btn-favorite.active {
+  background: #ff6b6b;
+  border-color: #ff6b6b;
+}
+
+.product-page-actions .btn-favorite:hover img,
+.product-page-actions .btn-favorite.active img {
+  filter: brightness(0) invert(1);
+}
+
+/* ---------------- REVIEWS ---------------- */
+.product-page-reviews {
+  margin: 4rem 10%;
+  background: #fff;
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.product-page-reviews h3 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  color: var(--black-900);
+}
+
+.review-summary {
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  color: var(--black-700);
+}
+
+.average-rating {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ffc107;
+  margin-bottom: 0.5rem;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.review-item {
+  border-bottom: 1px solid var(--black-100);
+  padding-bottom: 1rem;
+}
+
+.review-author {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--black-800);
+}
+
+.review-stars {
+  font-size: 1.4rem;
+  color: #ffc107;
+  margin: 0.3rem 0;
+}
+
+.review-text {
+  font-size: 1.4rem;
+  color: var(--black-700);
+}
+
+.review-date {
+  font-size: 1.2rem;
+  color: var(--black-500);
+}
+
