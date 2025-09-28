@@ -1,7 +1,11 @@
 // CATEGORY CLICKS
-document.querySelectorAll(".category-card").forEach(card => {
+document.querySelectorAll(".category-card").forEach((card) => {
   card.addEventListener("click", () => {
-    const category = card.querySelector("h4").textContent.toLowerCase().replace("&", "and").trim();
+    const category = card
+      .querySelector("h4")
+      .textContent.toLowerCase()
+      .replace("&", "and")
+      .trim();
     window.location.href = `products.html?category=${category}`;
   });
 });
@@ -21,8 +25,10 @@ document.addEventListener("click", (e) => {
     if (btn.classList.contains("in-cart")) {
       cartCount++;
       showToast("Item added to cart!");
+      btn.textContent = "Added";
     } else {
       cartCount--;
+      btn.textContent = "Add to the Cart";
       showToast("Item removed from cart!");
     }
 
