@@ -33,14 +33,14 @@ async function initProductPage() {
     const discountedPrice =
       product.price * (1 - product.discountPercentage / 100);
     document.querySelector(
-      ".proudct-page-main-price"
+      ".product-page-main-price"
     ).textContent = `$${discountedPrice.toFixed(2)}`;
 
     document.querySelector(
-      ".product-page-pervious-pirce"
+      ".product-page-previous-price"
     ).textContent = `$${product.price}`;
     document.querySelector(
-      ".proudct-page-main-discount"
+      ".product-page-main-discount"
     ).textContent = `- ${product.discountPercentage}%`;
 
     // Features

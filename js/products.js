@@ -47,10 +47,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           <span class="rating-stars">${getStars(product.rating)}</span>
           <span class="rating-value">(${product.rating.toFixed(1)})</span>
         </div>
-        <p class="product-price">$${(
-          product.price *
-          (1 - product.discountPercentage / 100)
-        ).toFixed(2)}</p>
+        <div class="product-card-price">
+          <span class="product-price-final">
+            $${(product.price * (1 - product.discountPercentage / 100)).toFixed(2)}
+          </span>
+          <span class="product-card-previous-price">
+            $${product.price}
+          </span>
+          <span class="product-card-discount">
+            -${product.discountPercentage}%
+          </span>
+      </div>
         <div class="product-actions">
           <button class="btn-favorite"><img src="./assets/icons/fav.png" alt="fav"></button>
         <button class="btn-add-to-cart">Add to Cart</button>
