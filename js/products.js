@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const products = await fetchProducts(BESTSELLER_LIMIT);
+    localStorage.setItem("allProducts", JSON.stringify(products));
     container.innerHTML = "";
 
     if (!products.length) {
@@ -46,7 +47,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           <span class="rating-stars">${getStars(product.rating)}</span>
           <span class="rating-value">(${product.rating.toFixed(1)})</span>
         </div>
-        <p class="product-price">$${product.price}</p>
+        <p class="product-price">$${(
+          product.price *
+          (1 - product.discountPercentage / 100)
+        ).toFixed(2)}</p>
         <div class="product-actions">
           <button class="btn-favorite"><img src="./assets/icons/fav.png" alt="fav"></button>
         <button class="btn-add-to-cart">Add to Cart</button>

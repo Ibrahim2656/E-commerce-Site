@@ -1,92 +1,91 @@
-import { getAllProducts, fetchProducts } from "./api.js";
+import { getAllProducts } from "./api.js";
+import {} from "./utils.js";
 
 async function initProductPage() {
-  let products = getAllProducts();
-  console.log("Before Checking", products);
-
-  // If cache is empty, fetch from API
-  if (!products || products.length === 0) {
-    products = await fetchProducts();
-  }
-
+  const products = await getAllProducts();
+  console.log(products);
   const params = new URLSearchParams(window.location.search);
   const id = parseInt(params.get("id"), 10);
 
-  const product = products.find((p) => p.id === id);
+  const product = products[id - 1];
 
   if (product) {
-    // Update page title
     document.title = product.title;
 
-    // Update main product image
+    // Images
     document.querySelector(".product-page-main-img").src = product.images[0];
     document.querySelector(".product-page-main-img").alt = product.title;
 
-    // Update thumbnail image
     document.querySelector(".product-page-thumb img").src = product.thumbnail;
-    document.querySelector(".product-page-thumb img").alt = `${product.title} thumbnail`;
+    document.querySelector(
+      ".product-page-thumb img"
+    ).alt = `${product.title} thumbnail`;
 
-    // Update product title
+    // Text-Info (Rating , Price , Title)
     document.querySelector(".product-page-title").textContent = product.title;
 
-    // Update rating
     const stars = "⭐".repeat(Math.round(product.rating));
-    document.querySelector(".product-page-rating p").innerHTML = 
-      `<span>${stars}</span> ${product.rating} (${product.reviews.length} Reviews)`;
+    document.querySelector(
+      ".product-page-rating p"
+    ).innerHTML = `<span>${stars}</span> ${product.rating} (${product.reviews.length} Reviews)`;
 
-    // Update price
-    document.querySelector(".proudct-page-main-price").textContent = `$${product.price}`;
+    // Price
+    const discountedPrice =
+      product.price * (1 - product.discountPercentage / 100);
+    document.querySelector(
+      ".proudct-page-main-price"
+    ).textContent = `$${discountedPrice.toFixed(2)}`;
 
-    // Update discount
-    document.querySelector(".proudct-page-main-discount").textContent = 
-      `${product.discountPercentage}% off`;
+    document.querySelector(
+      ".product-page-pervious-pirce"
+    ).textContent = `$${product.price}`;
+    document.querySelector(
+      ".proudct-page-main-discount"
+    ).textContent = `- ${product.discountPercentage}%`;
 
-    // Update availability
-    document.querySelector(".product-feature:nth-child(1) p").innerHTML = 
-      `<span>Availability: </span>${product.availabilityStatus}`;
+    // Features
+    document.querySelector(
+      ".availability-feature"
+    ).innerHTML = `<span>Availability: </span> ${product.availabilityStatus}`;
+    document.querySelector(
+      ".warranty-feature"
+    ).innerHTML = `<span>Warranty: </span> ${product.warrantyInformation}`;
+    document.querySelector(
+      ".shipping-feature"
+    ).innerHTML = `<span>Shipping: </span> ${product.shippingInformation}`;
 
-    // Update warranty
-    document.querySelector(".product-feature:nth-child(2) p").innerHTML = 
-      `<span>Warranty: </span>${product.warrantyInformation}`;
+    // Details
+    document.querySelector(".product-page-details p").textContent =
+      product.description;
 
-    // Update shipping
-    document.querySelector(".product-feature:nth-child(3) p").innerHTML = 
-      `<span>Shipping: </span>${product.shippingInformation}`;
-
-    // Update product details description
-    document.querySelector(".product-page-details p").textContent = product.description;
-
-    // Update product details list
-    const detailsList = document.querySelector(".product-page-details ul");
-    detailsList.innerHTML = `
-      <li><span>Brand:</span> ${product.brand }</li>
+    document.querySelector(".product-page-details ul").innerHTML = `
+      ${product.brand ? `<li><span>Brand:</span> ${product.brand}</li>` : ""}
       <li><span>Category:</span> ${product.category}</li>
       <li><span>SKU:</span> ${product.sku}</li>
       <li><span>Weight:</span> ${product.weight}g</li>
-      <li><span>Dimensions:</span> ${product.dimensions.width} × ${product.dimensions.height} × ${product.dimensions.depth} cm</li>
+      <li><span>Dimensions:</span> ${product.dimensions.width} × ${
+      product.dimensions.height
+    } × ${product.dimensions.depth} cm</li>
       <li><span>Return Policy:</span> ${product.returnPolicy}</li>
       <li><span>Minimum Order:</span> ${product.minimumOrderQuantity} units</li>
     `;
-
-    // Update reviews section
+    // Reviews
     const reviewsContainer = document.querySelector(".product-page-reviews");
     reviewsContainer.innerHTML = `<h3>Customer Reviews</h3>`;
-    
-    product.reviews.forEach(review => {
+    product.reviews.forEach((review) => {
       const stars = "⭐".repeat(review.rating);
       reviewsContainer.innerHTML += `
         <div class="product-review">
-          <p class="review-rating">${stars} (${review.rating}/5)</p>
-          <p class="review-comment">${review.comment}</p>
-          <small>- ${review.reviewerName}</small>
+          <p class="product-rating">${stars} (${review.rating}/5)</p>
+          <p class="review-comment"> ${review.comment}</p>
+          <small>${review.reviewerName}</small> 
         </div>
       `;
     });
-
   } else {
-    // If product not found, show error message
-    document.querySelector(".product-page-container").innerHTML = 
-      `<h2 style="text-align: center; padding: 5rem;">Product not found!</h2>`;
+    document.querySelector(
+      ".product-page-container"
+    ).innerHTML = `<h2 style="text-align=center">Product Not Found</h2>`;
   }
 }
 
