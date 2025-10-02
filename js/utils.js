@@ -6,7 +6,7 @@ document.querySelectorAll(".category-card").forEach((card) => {
       .textContent.toLowerCase()
       .replace("&", "and")
       .trim();
-    window.location.href = `products.html?category=${category}`;
+    window.location.href = `products.html?mode=category&category=${category}`;
   });
 });
 
