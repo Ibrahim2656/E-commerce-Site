@@ -45,161 +45,157 @@
     </header>
 
     <main>
-      <div class="products-page-wrapper">
-        <!-- Mobile filter toggle -->
-        <!-- <button class="mobile-filter-toggle" id="mobile-filter-toggle">🔍 Filters</button>
-        <div class="filter-overlay" id="filter-overlay"></div> -->
-
-        <div class="products-layout">
-          <!-- Sidebar -->
-          <aside class="filters-sidebar" id="filters-sidebar">
-            <div class="filters-header">
-              <h3>Filters</h3>
-              <button class="clear-all-btn" id="clear-all-filters">Clear All</button>
+      <!-- Sort bar -->
+      <section class="sort-bar">
+      <!-- Proudct-Count -->
+        <div class="product-count">
+          <span id="product-count-text">Loading products ....</span>
+        </div>
+        <!-- Drop down Sort menu -->
+        <div class="filter-content">
+          <div class="sort-options">
+          <label for="sort-select">Sort by</label>
+          <select id="sort-select">
+            <option value="default">Default</option>
+            <option value="price-low-high">Price: Low to high</option>
+            <option value="price-high-low">Price: high to Low</option>
+            <option value="name-a-z">Name: A-z</option>
+            <option value="name-z-a">Name: Z-A</option>
+            <option value="rating-high-low">Rating: High to Low</option>
+          </select>
+        </div>
+      </section>
+      <!-- Main content -->
+      <section class="products-main-container">
+        <!-- Filter sidebar -->
+        <aside class="filters-sidebar">
+          <!-- Filter Buttons -->
+          <div class="filter-header">
+            <h3>Filters</h3>
+            <div class="filter-buttons">
+              <button id="apply-filters">Apply</button>
+              <button id="clear-filters">Clear All</button>
             </div>
+          </div>
+          <!-- Filter by category -->
+          <div class="filter-group">
+            <h4>Category</h4>
+            <label><input type="checkbox" name="category" value="electronics">Electronics</label>
+            <label><input type="checkbox" name="category" value="fashion">Fashion</label>
+            <label><input type="checkbox" name="category" value="home and kitchen">Home & Kitchen</label>
+            <label><input type="checkbox" name="category" value="beauty">Beauty</label>
+            <label><input type="checkbox" name="category" value="sports">Sports</label>
+            <label><input type="checkbox" name="category" value="groceries">Groceries</label>
+            <label><input type="checkbox" name="category" value="automotive">Automotive</label>
+          </div>
 
-           <!-- Categories -->
-<div class="filter-section">
-  <h4>Category</h4>
-  <div class="category-filter-list">
-    <div class="category-filter-item">
-      <input type="checkbox" id="cat-electronics" value="electronics" />
-      <label for="cat-electronics">
-        <img src="./assets/icons/Electronics.png" alt="Electronics" class="category-icon" />
-        Electronics
-      </label>
-    </div>
-    <div class="category-filter-item">
-      <input type="checkbox" id="cat-fashion" value="fashion" />
-      <label for="cat-fashion">
-        <img src="./assets/icons/Fashion.png" alt="Fashion" class="category-icon" />
-        Fashion
-      </label>
-    </div>
-    <div class="category-filter-item">
-      <input type="checkbox" id="cat-home" value="home and kitchen" />
-      <label for="cat-home">
-        <img src="./assets/icons/home.png" alt="Home & Kitchen" class="category-icon" />
-        Home & Kitchen
-      </label>
-    </div>
-    <div class="category-filter-item">
-      <input type="checkbox" id="cat-beauty" value="beauty" />
-      <label for="cat-beauty">
-        <img src="./assets/icons/Beauty.png" alt="Beauty" class="category-icon" />
-        Beauty
-      </label>
-    </div>
-    <div class="category-filter-item">
-      <input type="checkbox" id="cat-sports" value="sports" />
-      <label for="cat-sports">
-        <img src="./assets/icons/Sports.png" alt="Sports" class="category-icon" />
-        Sports
-      </label>
-    </div>
-    <div class="category-filter-item">
-      <input type="checkbox" id="cat-groceries" value="groceries" />
-      <label for="cat-groceries">
-        <img src="./assets/icons/Groceries.png" alt="Groceries" class="category-icon" />
-        Groceries
-      </label>
-    </div>
-    <div class="category-filter-item">
-      <input type="checkbox" id="cat-automotive" value="automotive" />
-      <label for="cat-automotive">
-        <img src="./assets/icons/car.png" alt="Automotive" class="category-icon" />
-        Automotive
-      </label>
-    </div>
-  </div>
-</div>
+          <!-- Price Filter -->
+          <div class="filter-group">
+            <h4>Price Ranges</h4>
+            <label for=""><input name="price" type="radio" value="0-50">$0-$50</label>
+            <label for=""><input name="price" type="radio" value="50-100">$50-$100</label>
+            <label for=""><input name="price" type="radio" value="100-200">$100-$200</label>
+            <label for=""><input name="price" type="radio" value="200-400">$200-$400</label>
+            <label for=""><input name="price" type="radio" value="400-800">$400-$800</label>
+            <label for=""><input name="price" type="radio" value="800-1600">$800-$1600</label>
+            <label for=""><input name="price" type="radio" value="1600-3200">$1600-$3200</label>
+          </div>
 
-
-            <!-- Price Range -->
-            <div class="filter-section">
-              <h4>Price</h4>
-              <div class="price-range-options">
-                <div class="price-option">
-                  <input type="radio" id="price-all" name="price" value="all" checked />
-                  <label for="price-all">All Prices</label>
-                </div>
-                <div class="price-option">
-                  <input type="radio" id="price-0-50" name="price" value="0-50" />
-                  <label for="price-0-50">Under $50</label>
-                </div>
-                <div class="price-option">
-                  <input type="radio" id="price-50-100" name="price" value="50-100" />
-                  <label for="price-50-100">$50 - $100</label>
-                </div>
-                <div class="price-option">
-                  <input type="radio" id="price-100-500" name="price" value="100-500" />
-                  <label for="price-100-500">$100 - $500</label>
-                </div>
-                <div class="price-option">
-                  <input type="radio" id="price-500" name="price" value="500+" />
-                  <label for="price-500">$500+</label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Ratings -->
-            <div class="filter-section">
-              <h4>Rating</h4>
-              <div class="rating-filter-options">
-                <div class="rating-option">
-                  <input type="checkbox" id="rating-4" value="4" />
-                  <label for="rating-4">⭐⭐⭐⭐ & Up</label>
-                </div>
-                <div class="rating-option">
-                  <input type="checkbox" id="rating-3" value="3" />
-                  <label for="rating-3">⭐⭐⭐ & Up</label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Discounts -->
-            <div class="filter-section">
-              <h4>Discount</h4>
-              <div class="discount-filter-options">
-                <div class="discount-option">
-                  <input type="checkbox" id="discount-10" value="10" />
-                  <label for="discount-10">10% or more</label>
-                </div>
-                <div class="discount-option">
-                  <input type="checkbox" id="discount-20" value="20" />
-                  <label for="discount-20">20% or more</label>
-                </div>
-              </div>
-            </div>
-          </aside>
-
-          <!-- Main content -->
-          <div class="products-main-content">
-            <!-- <div class="active-filters hidden" id="active-filters"></div> -->
-
-            <div class="products-top-bar">
-              <span class="product-count" id="product-count">Loading...</span>
-              <div class="sort-container">
-                <label for="sort-select">Sort by:</label>
-                <select class="sort-select" id="sort-select">
-                  <option value="default">Default</option>
-                  <option value="price-low">Price: Low → High</option>
-                  <option value="price-high">Price: High → Low</option>
-                  <option value="rating">Highest Rated</option>
-                  <option value="discount">Biggest Discount</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="products-container" id="products-container" data-mode="all"></div>
-            <div class="pagination" id="pagination"></div>
+          <!-- Rating Filter -->
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label><input type="radio" name="rating" value="4-5"> 4 Stars & Above</label>
+            <label><input type="radio" name="rating" value="3-5"> 3 Stars & Above</label>
+            <label><input type="radio" name="rating" value="2-5"> 2 Stars & Above</label>
+            <label><input type="radio" name="rating" value="1-5"> Any Rating</label>
           </div>
         </div>
+        </aside>
+
+        <!-- Products Section and Pagination -->
+        <section class="products-section">
+          <div class="products-container" id="products-container" data-mode="all">   
+          <!-- Products will get fetched from the Api here  -->
+          </div>
+          <!-- Pagination  -->
+          <nav class="pagination">
+            <button class="page-btn" id="prev-btn">&laquo; Previous</button>
+            <div class="page-numbers" id="page-numbers">
+              <!-- page numbers will be inserted here -->
+            </div>
+            <button class="page-btn" id="next-btn">Next &laquo;</button>
+          </nav>
+        </section>
+      </section>
       </div>
     </main>
 
     <footer>
-      <!-- Keep your footer unchanged -->
+      <section class="footer">
+        <div class="footer-top">
+          <div class="footer-column">
+            <h3>Mini Mart</h3>
+            <p>Lorem Ipsum, 235 Simply, printing, Pin 309 309</p>
+            <p>info@minimart.com</p>
+            <p>+1 000 000 0000</p>
+          </div>
+          <div class="footer-column">
+            <h4>Informatoin</h4>
+            <ul>
+              <li><a href="#">Electronics</a></li>
+              <li><a href="#">Home & Kitchen</a></li>
+              <li><a href="#">Sports</a></li>
+              <li><a href="#">Groceries</a></li>
+              <li><a href="#">Beauty</a></li>
+              <li><a href="#">Fashion</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Contact Us</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Track Orders</a></li>
+              <li><a href="#">Shipping</a></li>
+              <li><a href="#">Cancellation</a></li>
+              <li><a href="#">Returns</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">News</a></li>
+              <li><a href="#">Career</a></li>
+              <li><a href="#">Terms of Use</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Mini Mart, All Rights Reserved.</p>
+          <p>Privacy Policy | Terms & Conditions</p>
+          <div class="social-icons">
+            <a href="#"
+              ><img src="./assets/icons/facebook.png" alt="Facebook"
+            /></a>
+            <a href="#"
+              ><img src="./assets/icons/linkedin.png" alt="LinkedIn"
+            /></a>
+            <a href="#"
+              ><img src="./assets/icons/twitter.png" alt="Twitter"
+            /></a>
+            <a href="#"
+              ><img src="./assets/icons/instagram.png" alt="Instagram"
+            /></a>
+            <a href="#"><img src="./assets/icons/apple.png" alt="Apple" /></a>
+            <a href="#"
+              ><img src="./assets/icons/play-store.png" alt="Google Play "
+            /></a>
+            <a href="#"
+              ><img src="./assets/icons/youtube.png" alt="YouTube"
+            /></a>
+          </div>
+        </div>
+      </section>
     </footer>
 
     <div id="toast" class="toast">Item added to cart</div>

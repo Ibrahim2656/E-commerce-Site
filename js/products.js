@@ -3,6 +3,7 @@ import {
   BESTSELLER_LIMIT,
   BESTSELLER_PRODUCT_LIMIT,
   BESTSELLER_RATING_THRESHOLD,
+  PRODUCTS_PER_PAGE
 } from "./config.js";
 import { fetchProducts, getAllProducts } from "./api.js";
 
@@ -26,6 +27,11 @@ const CATEGORY_MAP = {
   groceries: ["groceries"],
   automotive: ["motorcycles", "vehicles"]
 };
+// Configuration for pagination and filtering
+let currentPage=1;
+let allProducts=[];
+let filteredProducts = [];
+let currentMode='';
 
 function getStars(rating) {
   const stars = Math.ceil(rating);
@@ -95,51 +101,266 @@ function renderAllProducts(products, container) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const container = document.getElementById("products-container");
+function applyFilters(){
+  const selectedCategories=Array.from(document.querySelectorAll('input[name="category"]:checked')).map(checkbox=> checkbox.value);
+  const selectedPrice=document.querySelector('input[name="price"]:checked')?.value;
+  const selectedRating = document.querySelector('input[name="rating"]:checked')?.value;
+  
+  
+  filteredProducts = allProducts.filter(product=>{
 
-  if (!container) return;
+    let categoryMatch = true;
+    if (selectedCategories.length > 0) {
+      categoryMatch = selectedCategories.some(cat => 
+        CATEGORY_MAP[cat]?.includes(product.category.toLowerCase())
+      );
+    }
+    let priceMatch=true;
+    if(selectedPrice){
+      const [min,max]=selectedPrice.split('-').map(Number);
+      priceMatch = product.price >= min && product.price <=max;
+    }
 
-  const params = new URLSearchParams(window.location.search);
-  const mode = params.get("mode") || container.dataset.mode; // bestseller | all | category
+    let ratingMatch=true;
+    if(selectedRating){
+      const[minRating]= selectedRating.split('-').map(Number);
+      ratingMatch= product.rating >=minRating
+    }
+
+    return categoryMatch  && priceMatch && ratingMatch
+
+  });
+  currentPage=1;
+  renderFilteredProducts();
+  setupPagination();
+}
+
+// Clear fucntion for Clear button
+function clearFilters(){
+  document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(input=> input.checked=false);
+
+  // Reset the sort
+  const sortSelect = document.getElementById('sort-select');
+  if(sortSelect) sortSelect.value='default';
+
+  // Reseting for products
+  filteredProducts=[...allProducts];
+  currentPage=1;
+  renderFilteredProducts();
+  setupPagination();
+}
+
+function handleSort(){
+  const sortSelect=document.getElementById('sort-select');
+  const sortValue= sortSelect.value;
+
+  switch(sortValue){
+    case 'price-low-high':
+      filteredProducts.sort((a,b)=>{return a.price - b.price});
+      break;
+    case 'price-high-low':
+      filteredProducts.sort((a,b)=>{
+        return b.price - a.price
+      });
+      break;
+    case 'name-a-z':
+      filteredProducts.sort((a,b)=>{
+        return a.title.localeCompare(b.title);
+      });
+      break;
+    case 'name-z-a':
+      filteredProducts.sort((b,a)=>{
+        return b.title.localeCompare(a.title);
+      });
+      break;
+    case 'rating-high-low':
+      filteredProducts.sort((a,b)=>{return b.rating - a.rating;});
+      break;
+    default:
+      break;
+  }
+  currentPage = 1;
+  renderFilteredProducts();
+  setupPagination();
+}
+
+function renderFilteredProducts() {
+  const productContainer = document.getElementById('products-container');
+  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const endIndex = startIndex + PRODUCTS_PER_PAGE;
+  const productsToShow = filteredProducts.slice(startIndex, endIndex);
+
+  productContainer.innerHTML = '';
+  if (productsToShow.length === 0) {
+    productContainer.innerHTML = '<p class="no-products">No products match your filters. Try adjusting your criteria.</p>';
+    return;
+  }
+
+  productsToShow.forEach(product => {
+    const card = createProductCard(product, {
+      showBadge: product.rating >= BESTSELLER_RATING_THRESHOLD,
+    });
+    productContainer.appendChild(card);
+  });
+}
+
+function setupPagination(){
+  const pageNumbersElement=document.getElementById('page-numbers');
+  const prevButton = document.getElementById('prev-btn');
+  const nextButton = document.getElementById('next-btn');
+  // // 12 of 194 ... 12 is the proudct-count-text
+  // const productCountText=document.getElementById('product-count-text')
+
+  // if no pagination (for bestseller part )
+  if(!pageNumbersElement)return;
+  const pageCount = Math.ceil(filteredProducts.length/PRODUCTS_PER_PAGE)
+  pageNumbersElement.innerHTML='';
+
+  const startPage=Math.max(1,currentPage-2);
+  const endPage=Math.min(pageCount,startPage+4);
+
+  for(let i=startPage;i<=endPage;i++){
+    const pageButton=document.createElement('button');
+    pageButton.innerText=i;
+    pageButton.classList.add('page-number')
+    if(i==currentPage)pageButton.classList.add('active');
+
+    pageButton.addEventListener('click',()=>goToPage(i));
+    pageNumbersElement.appendChild(pageButton);
+  }
+  if(prevButton){
+    if(currentPage===1){
+      prevButton.disabled=true;
+    }
+    else{
+      prevButton.disabled=false;
+    }
+  }
+  if(nextButton){
+    if(currentPage===pageCount ||pageCount===0){nextButton.disabled=true;}
+    else{nextButton.disabled=false;}
+  }
+  updateProductCount();
+}
+function goToPage(page){
+  currentPage=page;
+  renderFilteredProducts();
+  setupPagination();
+  //scrolling
+  const productsContainer=document.getElementById('products-container')
+  // scroll to the container with 100 px differnce above
+  if(productsContainer){window.scrollTo({top: productsContainer.offsetTop-100, behavior: 'smooth'})}
+}
+
+function goToPrevPage(){
+  if(currentPage>1){
+    goToPage(currentPage-1);
+  }
+}
+function goToNextPage(){
+  const pageCount=Math.ceil(filteredProducts.length/PRODUCTS_PER_PAGE);
+  if(currentPage<pageCount){
+    goToPage(currentPage+1);
+  }
+}
+function updateProductCount(){
+  const productCountText=document.getElementById('product-count-text');
+  if(!productCountText)return;
+
+  const totalProudcts=filteredProducts.length;
+  let start;
+  if(totalProudcts===0){
+    start=0;
+  }
+  else{
+    start=(currentPage-1)*PRODUCTS_PER_PAGE+1;
+  }
+  const end = Math.min(currentPage*PRODUCTS_PER_PAGE,totalProudcts)
+  productCountText.textContent=totalProudcts === 0 
+  ?'No product found':
+  `showing ${start}-${end} of ${totalProudcts} products`
+}
+
+function setupEventListeners(){
+  const sortSelect = document.getElementById('sort-select');
+  const applyFiltersButton = document.getElementById('apply-filters')
+  const clearFiltersButton = document.getElementById('clear-filters')
+  const prevButton = document.getElementById('prev-btn')
+  const nextButton = document.getElementById('next-btn')
+
+
+  if(sortSelect)sortSelect.addEventListener('change',handleSort)
+  if(applyFiltersButton) applyFiltersButton.addEventListener('click',applyFilters)
+  if(clearFiltersButton) clearFiltersButton.addEventListener('click',clearFilters)
+  if(prevButton)prevButton.addEventListener('click',goToPrevPage)
+  if(nextButton)nextButton.addEventListener('click',goToNextPage)
+}
+// checking if we are in the proudct.thml
+function shouldShowFiltersAndPagination() {
+  return document.getElementById('sort-select') && 
+        document.getElementById('apply-filters') && 
+        document.getElementById('page-numbers')
+}
+
+function autoCheckCategoryFilter(categoryFromUrl){
+  if(!categoryFromUrl)return;
+  const categoryCheckBox=document.querySelector(`input[name="category"][value="${categoryFromUrl}"]`);
+    if (categoryCheckBox) {
+    categoryCheckBox.checked = true;
+  }
+}
+
+document.addEventListener('DOMContentLoaded',async()=>{
+  const container =document.getElementById("products-container")
+  if(!container)return;
+  const params= new URLSearchParams(window.location.search)
+  const mode= params.get('mode') || container.dataset.mode;
+  currentMode = mode
 
   try {
     let products;
-    if (mode === "bestseller") {
-      products = await fetchProducts(BESTSELLER_LIMIT);
-      container.innerHTML = "";
-      renderBestSellers(products, container);
-    } else if (mode == "all") {
-      products = await fetchProducts();
-      container.innerHTML = "";
-      renderAllProducts(products, container);
-    } else if (mode === "category") {
-      const param = new URLSearchParams(window.location.search);
-      const category = param.get("category");
-
+    if(mode==='bestseller'){
+      products=await fetchProducts(BESTSELLER_LIMIT);
+      renderBestSellers(products,container)
+    }
+    else if(mode==="all"){
+      products=await fetchProducts();
+      if(shouldShowFiltersAndPagination()){
+        allProducts = products;
+        filteredProducts =[...allProducts]
+        renderFilteredProducts();
+        setupPagination();
+        setupEventListeners();
+      }
+      else{
+        renderAllProducts(products,container)
+      }
+    }
+    else if(mode==='category'){
+      const category = params.get("category");
       products = await getAllProducts();
-
       if (products.length < DEFAULT_LIMIT) {
         products = await fetchProducts();
       }
-      console.log(category);
 
       const validCategories = CATEGORY_MAP[category] || [];
       const filtered = products.filter((p) =>
         validCategories.includes(p.category.toLowerCase())
       );
 
-      container.innerHTML = "";
-      if (filtered.length) {
-        renderAllProducts(filtered, container);
-      } else {
-        container.innerHTML = `<p>No products found for category: ${category}</p>`;
-      }
-    } else {
-      container.innerHTML = `<h1>Unknow Mode , Please make sure about the mode you want`;
+      allProducts = products; 
+      filteredProducts = filtered; 
+      
+      autoCheckCategoryFilter(category);
+      
+      renderFilteredProducts();
+      setupPagination();
+      setupEventListeners();
+    
     }
+    
   } catch (error) {
-    console.error(error);
-    container.innerHTML = `<h1> Error Loading products.</p>`;
+    console.error(error)
+    container.innerHTML=`<h1> Error Loading Products.</h1>`
   }
-});
+})
