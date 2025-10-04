@@ -53,11 +53,22 @@ A fully responsive **Vanilla JavaScript** e-commerce website designed to simulat
 ---
 
 ## 💻 Technologies Used
-- **HTML5** – Semantic markup for structure.
-- **CSS3** – Responsive layouts, grid, flexbox, transitions, and hover effects.
-- **Vanilla JavaScript (ES6 Modules)** – Dynamic product fetching, cart/favorites management, filtering, sorting, and search.
-- **Local Storage** – Persist cart and favorites data.
-- **No frameworks or libraries** – Fully custom code.
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)  
+Semantic markup for building the website structure.
+
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)  
+Responsive layouts using Grid & Flexbox, animations, transitions, and hover effects.
+
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)  
+Vanilla JS (ES6 Modules) for dynamic product rendering, filtering, sorting, cart/favorites management, and search functionality.
+
+![Local Storage](https://img.shields.io/badge/Local%20Storage-000000?style=for-the-badge&logo=sqlite&logoColor=white)  
+Persisting cart and favorites data across sessions.
+
+**No frameworks or libraries used** – 100% custom, lightweight, and fast.
+
+
 
 ---
 
@@ -98,3 +109,4 @@ E-commerce-Site
 ## 📄 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
