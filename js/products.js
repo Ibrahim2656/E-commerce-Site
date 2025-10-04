@@ -395,7 +395,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     // simple search  
     const searchInput=document.getElementById('searchinput');
-    searchInput.addEventListener('input',()=>{
+    if(searchInput){
+      searchInput.addEventListener('input',()=>{
       const searchTerm=searchInput.value.toLowerCase().trim();
       const container =document.getElementById('products-container');
       if(!searchTerm){
@@ -414,6 +415,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const card =createProductCard(product,{showBadge:product.rating>=BESTSELLER_RATING_THRESHOLD,});
         container.appendChild(card); });
     });
+    }
 
 }catch (error) {
     console.error(error)
