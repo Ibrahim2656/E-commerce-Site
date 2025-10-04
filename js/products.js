@@ -392,10 +392,30 @@ document.addEventListener('DOMContentLoaded', async () => {
       renderFilteredProducts();
       setupPagination();
       setupEventListeners();
-
     }
+    // simple search  
+    const searchInput=document.getElementById('searchinput');
+    searchInput.addEventListener('input',()=>{
+      const searchTerm=searchInput.value.toLowerCase().trim();
+      const container =document.getElementById('products-container');
+      if(!searchTerm){
+        renderFilteredProducts();
+        setupPagination();
+      }
+      container.innerHTML='';
+      const searchResults=filteredProducts.filter(product=>product.title.toLowerCase().includes(searchTerm))
+      if(searchResults.length===0){
+        container.innerHTML = '<p class="no-products">No products found.</p>';
+        return;
+      }
 
-  } catch (error) {
+      
+      searchResults.forEach(product=>{
+        const card =createProductCard(product,{showBadge:product.rating>=BESTSELLER_RATING_THRESHOLD,});
+        container.appendChild(card); });
+    });
+
+}catch (error) {
     console.error(error)
     container.innerHTML = `<h1> Error Loading Products.</h1>`
   }
