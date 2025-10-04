@@ -1129,7 +1129,7 @@ header {
 }
 
 /* Responsive for productPage*/
-@media (max-width: 750px) {
+@media (max-width: 768px) {
   .product-page {
     flex-direction: column;
   }
@@ -1139,7 +1139,7 @@ header {
   }
 
   .btn-favorite {
-    width: 20%;
+    width: 18%;
 
   }
 
