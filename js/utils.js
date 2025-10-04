@@ -82,6 +82,7 @@ function getFavorites(){
       console.error("Error parsing Favorites data",e)
     }
   }
+  return [];
 }
 
 function saveFavorites(favorites){
