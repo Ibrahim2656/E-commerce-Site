@@ -55,6 +55,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 main {
@@ -255,7 +256,6 @@ header {
   background-color: var(--black-200);
   transform: scale(1.05);
 }
-
 /* ============================================================================================================================================ */
 /*------------------------------------------- Category Section--------------------------------------------------- */
 .category-section {
@@ -304,6 +304,7 @@ header {
   font-weight: 600;
   color: var(--black-700);
 }
+
 
 /* ================================================================================================= */
 /* Best Seller Section and product card */
@@ -878,9 +879,6 @@ header {
     display: none;
   }
 }
-
-/* Responsive for the footer if need */
-
 /* ============================================================================================================================================ */
 /* ---------------- PRODUCT PAGE ---------------- */
 .product-page-container {
@@ -1461,7 +1459,7 @@ header {
   }
 }
 
-@media (maxwidth:768px) {
+@media (max-width:768px) {
   .cart-main {
     padding: 2rem 1.5rem;
   }
@@ -1502,7 +1500,7 @@ header {
     width: 100%;
   }
 }
-
+/* ================================================================================================= */
 /* Check out Page */
 .checkout-main {
   max-width: 120rem;
@@ -1834,7 +1832,7 @@ header {
   transform: translateY(-2px) scale(1.02);
   background-color: var(--black-900);
 }
-@media(max-width:786px){
+@media(max-width:768px){
   #favorites-items .product-card {
     width: 100%;
   }
@@ -1850,5 +1848,141 @@ header {
   }
   .empty-favorites h3 ,.empty-favorites p{
     margin-bottom: 1rem;
+  }
+}
+
+/* tablet range(768px - 1080px)*/ 
+/* Search bar in desktop was 40rem now it will be 20-25 rem for tables (med screen) */
+@media(min-width:768px) and (max-width:1080px){
+  .navbar-search input{
+    min-width: 20rem;
+    max-width: 25rem;
+  }
+}
+
+/* Mobile only less than 767px */
+@media(max-width:767px){
+  html{
+    /* To fit mobile view and 
+    since we are using rems so it's easy to change the font */
+    font-size: 9px;
+  }
+  header{
+    padding: 1rem;
+    height: auto;
+  }
+  .nav-bar{
+    /* in mobile view we will make the nav bar as stack */
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .navbar-left{
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .navbar-left .logo{
+    text-align: center;
+  }
+  /* wiwth gap 0 we will build stack as blocks on each other */
+  .nav-links ul{
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+  }
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--black-200);
+  }
+  
+  .nav-links li:last-child {
+    border-bottom: none;
+  }
+  .nav-links a {
+    /* so each block in the stack take the full width */
+    display: block;
+    padding: 1.2rem;
+  }
+  /* Right side navbar */
+  .navbar-right{
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .navbar-search{
+    width: 100%;
+  }
+  .navbar-search input{
+    /* overridding the old min-width above in normal case */
+    min-width: 0;
+    width: 100%;
+  }
+  .icons ul{
+    justify-content: center;
+  }
+  /* Hero section Part */
+  .hero-section{
+    height: 50vh;
+  }
+  .hero-section img{
+    height: 50vh;
+  }
+  .hero-text{
+    /* centering the text on the img (bc the text is abs) */
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 85%;
+    text-align: center;
+  }
+  /* Category,best seller section */
+  .category-section,.bestseller-section{
+    margin: 0 4%;
+  }
+  .categories{
+    /* category will be only two cards */
+    grid-template-columns: repeat(1,1fr);
+    gap: 1.5rem;
+  }
+  /* Best seller same as category */
+  .products-container{
+    grid-template-columns: repeat(2,1fr);
+    gap: 1.5rem;
+  }
+  /* Footer */
+  /* Same as nav we will stack the footer */
+  .footer-top{
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-bottom{
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .social-icons{
+    justify-content: center;
+  }
+}
+
+/* Very small phones  */
+@media(max-width:479px){
+  html{
+    font-size: 8px;
+  }
+  .hero-text h1{
+    font-size: 3.5rem;
+  }
+  .hero-text h2{
+    font-size: 2rem;
+  }
+  .category-section,.bestseller-section{
+    margin: 0 3%;
+  }
+  .categories{
+    grid-template-columns: 1fr;
+  }
+  .products-container {
+    grid-template-columns: 1fr;
   }
 }
