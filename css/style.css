@@ -736,7 +736,7 @@ header {
 
   .sort-bar {
     flex-direction: column;
-    gap: 10px;
+    gap: 1.5rem;
     align-items: flex-start;
   }
 
