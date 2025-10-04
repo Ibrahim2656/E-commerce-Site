@@ -18,7 +18,9 @@ function showToast(message) {
     toast.classList.remove("show");
   }, 2000);
 }
+// =====================================================================
 // Cart Functions
+// ========================
 function getCart() {
   const cartData = localStorage.getItem('miniMartCart');
   if (cartData) {
@@ -66,56 +68,51 @@ function cartRemove(productId,button){
   showToast("Item removed from cart!")
   if(button)button.textContent="Add to Cart"
 }
-export{showToast,getCart,saveCart,updateCartCounter,cartRemove,cartAdd}
+// =============================================================================
+// Favorites section
+// ===================
 
-
-
-// Favorites Functions
-function getFavorites() {
-    const favoritesData = localStorage.getItem('miniMartFavorites');
-    if (favoritesData) {
-        try {
-            return JSON.parse(favoritesData);
-        } catch (e) {
-            console.error('Error parsing favorites data', e);
-            return [];
-        }
+function getFavorites(){
+  const favorites = localStorage.getItem("miniMartFavorites");
+  if (favorites){
+    try{
+      return JSON.parse(favorites)
     }
-    return [];
-}
-
-function saveFavorites(favorites) {
-    localStorage.setItem("miniMartFavorites", JSON.stringify(favorites));
-}
-
-function updateFavCounter() {
-    const counter = document.getElementById('fav-count');
-    if (!counter) return;
-    const favorites = getFavorites();
-    counter.textContent = favorites.length;
-}
-
-function addFavorite(product) {
-    let favorites = getFavorites();
-    const existing = favorites.find(item => item.id === product.id);
-    
-    if (!existing) {
-        favorites.push(product);
-        saveFavorites(favorites);
-        updateFavCounter();
-        showToast('Added to Favorites!');
+    catch(e){
+      console.error("Error parsing Favorites data",e)
     }
+  }
 }
 
-function removeFavorite(productId) {
-    let favorites = getFavorites();
-    favorites = favorites.filter(item => item.id != productId);
-    saveFavorites(favorites);
-    updateFavCounter();
-    showToast('Removed from Favorites!');
+function saveFavorites(favorites){
+  localStorage.setItem("miniMartFavorites",JSON.stringify(favorites))
+}
+function updateFavCounter(){
+  const counter = document.getElementById('fav-count');
+  if(!counter)return;
+  const favorites = getFavorites();
+  counter.textContent=favorites.length;
 }
 
-// Export the new functions
+function addFavorite(product){
+  let favorite=getFavorites()
+  const existing = favorite.find(item=> item.id === product.id)
+  if(!existing){
+    favorite.push(product);
+    saveFavorites(favorite)
+    updateFavCounter()
+    showToast("Added to Favorites!")
+  }
+}
+
+function removeFavorite(productId){
+  let favorites = getFavorites()
+  favorites = favorites.filter(item=>item.id !== productId);
+  saveFavorites(favorites)
+  updateFavCounter()
+  showToast("Removed From the Favorites!")
+}
+
 export { 
     showToast, getCart, saveCart, updateCartCounter, cartRemove, cartAdd,
     getFavorites, saveFavorites, updateFavCounter, addFavorite, removeFavorite 

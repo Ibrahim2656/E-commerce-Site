@@ -1,5 +1,8 @@
 import { getAllProducts } from "./api.js";
-import { cartAdd, cartRemove, getCart ,showToast,updateCartCounter} from "./utils.js";
+import {
+  cartAdd, cartRemove, getCart, updateCartCounter
+  , addFavorite, getFavorites, updateFavCounter, removeFavorite
+} from "./utils.js";
 
 async function initProductPage() {
   const products = await getAllProducts();
@@ -12,6 +15,7 @@ async function initProductPage() {
   if (product) {
     document.title = product.title;
     updateCartCounter();//to update the counter
+    updateFavCounter();
 
     // Images
     document.querySelector(".product-page-main-img").src = product.images[0];
@@ -64,9 +68,8 @@ async function initProductPage() {
       <li><span>Category:</span> ${product.category}</li>
       <li><span>SKU:</span> ${product.sku}</li>
       <li><span>Weight:</span> ${product.weight}g</li>
-      <li><span>Dimensions:</span> ${product.dimensions.width} × ${
-      product.dimensions.height
-    } × ${product.dimensions.depth} cm</li>
+      <li><span>Dimensions:</span> ${product.dimensions.width} × ${product.dimensions.height
+      } × ${product.dimensions.depth} cm</li>
       <li><span>Return Policy:</span> ${product.returnPolicy}</li>
       <li><span>Minimum Order:</span> ${product.minimumOrderQuantity} units</li>
     `;
@@ -86,25 +89,43 @@ async function initProductPage() {
     //added in the cart
     const addToCartBtn = document.querySelector(".btn-add-to-cart");
     const cart = getCart();
-    if(cart.some(item=>item.id==product.id)){
-      addToCartBtn.textContent='Added'
+    if (cart.some(item => item.id == product.id)) {
+      addToCartBtn.textContent = 'Added'
     }
-    else{
+    else {
       addToCartBtn.textContent = "Add to Cart";
     }
     addToCartBtn.addEventListener("click", (e) => {
-      e.stopPropagation(); 
-      const cartNow=getCart();
+      e.stopPropagation();
+      const cartNow = getCart();
       const isInCart = cartNow.some(item => item.id === product.id);
-      if(isInCart){
+      if (isInCart) {
         cartRemove(product.id, addToCartBtn);
         addToCartBtn.textContent = "Add to Cart";
       }
-      else{
+      else {
         cartAdd(product, addToCartBtn);
         addToCartBtn.textContent = "Added";
       }
-  });
+    });
+    const addToFav = document.querySelector('.btn-favorite')
+    const fav = getFavorites()
+    if (fav.some(item => item.id === product.id)) {
+      addToFav.classList.add('active')
+    }
+    addToFav.addEventListener('click', (e) => {
+      e.stopPropagation()
+      let favorite = getFavorites();
+      const isInFav = favorite.some(item => item.id === product.id);
+      if (isInFav) {
+        removeFavorite(product.id)
+        addToFav.classList.remove('active')
+      }
+      else {
+        addFavorite(product)
+        addToFav.classList.add('active');
+      }
+    });
   } else {
     document.querySelector(
       ".product-page-container"

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favorites - Mini Mart</title>
+    <title> My Favorites</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
     <header>
         <nav class="nav-bar">
@@ -51,11 +53,11 @@
                 <h1>My Favorites</h1>
                 <span class="favorites-count" id="favorites-count">0 items</span>
             </div>
-            
+
             <div class="products-container" id="favorites-items">
                 <!-- Empty State -->
                 <div class="empty-favorites">
-                    <img src="./assets/icons/empty-fav.png" alt="Empty Favorites">
+                    <img src="./assets/icons/emptyfav.png" alt="Empty Favorites">
                     <h3>Your Favorites is empty</h3>
                     <p>You haven't added any products to favorites yet</p>
                     <a href="products.html" class="shop-btn">Start Shopping</a>
@@ -66,9 +68,63 @@
     </main>
 
     <footer>
-        <!-- Same footer as other pages -->
+        <section class="footer">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <h3>Mini Mart</h3>
+                    <p>Lorem Ipsum, 235 Simply, printing, Pin 309 309</p>
+                    <p>info@minimart.com</p>
+                    <p>+1 000 000 0000</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Informatoin</h4>
+                    <ul>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Home & Kitchen</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Groceries</a></li>
+                        <li><a href="#">Beauty</a></li>
+                        <li><a href="#">Fashion</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Orders</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Cancellation</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Career</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Mini Mart, All Rights Reserved.</p>
+                <p>Privacy Policy | Terms & Conditions</p>
+                <div class="social-icons">
+                    <a href="#"><img src="./assets/icons/facebook.png" alt="Facebook" /></a>
+                    <a href="#"><img src="./assets/icons/linkedin.png" alt="LinkedIn" /></a>
+                    <a href="#"><img src="./assets/icons/twitter.png" alt="Twitter" /></a>
+                    <a href="#"><img src="./assets/icons/instagram.png" alt="Instagram" /></a>
+                    <a href="#"><img src="./assets/icons/apple.png" alt="Apple" /></a>
+                    <a href="#"><img src="./assets/icons/play-store.png" alt="Google Play " /></a>
+                    <a href="#"><img src="./assets/icons/youtube.png" alt="YouTube" /></a>
+                </div>
+            </div>
+        </section>
     </footer>
+    <div id="toast" class="toast">Item added to cart</div>
 
     <script type="module" src="./js/favorites.js"></script>
 </body>
+
 </html>

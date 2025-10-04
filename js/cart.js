@@ -1,4 +1,4 @@
-import { getCart, updateCartCounter, saveCart } from "./utils.js";
+import { getCart, updateCartCounter, saveCart, updateFavCounter } from "./utils.js";
 import { TAX_VALUE, SHIPPING_VALUE } from "./config.js"
 let cart = [];
 
@@ -69,6 +69,7 @@ function renderCart() {
 
 document.addEventListener('DOMContentLoaded', () => {
     updateCartCounter();
+    updateFavCounter();
     renderCart();
     const container = document.getElementById('cart-items')
     container.addEventListener('click', function (e) {
