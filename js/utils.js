@@ -76,7 +76,7 @@ function getFavorites(){
   const favorites = localStorage.getItem("miniMartFavorites");
   if (favorites){
     try{
-      return JSON.parse(favorites)
+      return JSON.parse(favorites) || [];
     }
     catch(e){
       console.error("Error parsing Favorites data",e)
