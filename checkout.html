@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Mini Mart</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-bar">
+            <div class="navbar-left">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">Mini Mart</a>
+                </div>
+                <!-- Links -->
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="favorites.html">Favorites</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Right Side  -->
+            <div class="navbar-right">
+                <div class="navbar-search">
+                    <input type="text" placeholder="Search...." />
+                    <a href=""><img src="assets/icons/search.png" alt="Search" /></a>
+                </div>
+                <div class="icons">
+                    <ul>
+                        <li>
+                            <a href="favorites.html"><img src="./assets/icons/fav.png" alt="My Favorites" />
+                                <span id="fav-count" class="counter">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cart.html"><img src="./assets/icons/cart.png" alt="Cart" />
+                                <span id="cart-counter" class="counter">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="checkout-main">
+        <div class="checkout-container">
+            <section class="checkout-left-side">
+                <div class="checkout-header">
+                    <h1>Checkout</h1>
+                </div>
+                <form class="checkout-form" id="checkout-form">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="full-name" required>
+                        <div class="error-message" id="name-error">Please Enter your fullname</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message" id="email-error">Please enter a valid email address</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Shipping Address</label>
+                        <input type="text" id="address" name="address" required>
+                        <div class="error-message" id="address-error">Please enter your shipping address</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required>
+                        <div class="error-message" id="city-error">Please enter your city</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip-code">ZIP Code</label>
+                        <input type="text" id="zip-code" name="zip-code" required>
+                        <div class="error-message" id="zip-error">Please enter a valid ZIP code</div>
+                    </div>
+                </form>
+            </section>
+            <section class="checkout-right-side">
+                <aside class="order-summary-checkout">
+                    <h2>Order Summary</h2>
+                    <div class="order-items" id="order-items">
+                        <!-- fetched with Js -->
+                    </div>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="shipping">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax</span>
+                            <span id="tax">$0.00</span>
+                        </div>
+                        <div class="summary-row order-total-header">
+                            <span>Total Cost</span>
+                            <span id="total-cost">$0.00</span>
+                        </div>
+                    </div>
+                    <button class="btn-place-order" id="btn-place-order">Place Order</button>
+                    <a href="cart.html" class="btn-back-cart">Back to Cart</a>
+                </aside>
+            </section>
+        </div>
+        <div class="success-message" id="success-message">
+            <img src="./assets/icons/success.png" alt="Order Success">
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for your purchase. Your order has been confirmed.</p>
+            <a href="products.html" class="btn-continue-shopping">Continue Shopping</a>
+        </div>
+    </main>
+
+    <footer>
+        <section class="footer">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <h3>Mini Mart</h3>
+                    <p>Lorem Ipsum, 235 Simply, printing, Pin 309 309</p>
+                    <p>info@minimart.com</p>
+                    <p>+1 000 000 0000</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Informatoin</h4>
+                    <ul>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Home & Kitchen</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Groceries</a></li>
+                        <li><a href="#">Beauty</a></li>
+                        <li><a href="#">Fashion</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Orders</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Cancellation</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Career</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Mini Mart, All Rights Reserved.</p>
+                <p>Privacy Policy | Terms & Conditions</p>
+                <div class="social-icons">
+                    <a href="#"><img src="./assets/icons/facebook.png" alt="Facebook" /></a>
+                    <a href="#"><img src="./assets/icons/linkedin.png" alt="LinkedIn" /></a>
+                    <a href="#"><img src="./assets/icons/twitter.png" alt="Twitter" /></a>
+                    <a href="#"><img src="./assets/icons/instagram.png" alt="Instagram" /></a>
+                    <a href="#"><img src="./assets/icons/apple.png" alt="Apple" /></a>
+                    <a href="#"><img src="./assets/icons/play-store.png" alt="Google Play " /></a>
+                    <a href="#"><img src="./assets/icons/youtube.png" alt="YouTube" /></a>
+                </div>
+            </div>
+        </section>
+    </footer>
+<script type="module" src="./js/checkout.js"></script>
+</body>
+
+</html>

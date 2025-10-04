@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites - Mini Mart</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <div class="navbar-left">
+                <div class="logo">
+                    <a href="index.html">Mini Mart</a>
+                </div>
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="favorites.html">Favorites</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-search">
+                    <input type="text" placeholder="Search...." />
+                    <a href=""><img src="assets/icons/search.png" alt="Search" /></a>
+                </div>
+                <div class="icons">
+                    <ul>
+                        <li>
+                            <a href="favorites.html"><img src="./assets/icons/fav.png" alt="My Favorites" />
+                                <span id="fav-count" class="counter">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cart.html"><img src="./assets/icons/cart.png" alt="Cart" />
+                                <span id="cart-counter" class="counter">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="favorites-main">
+        <section class="favorites-container">
+            <div class="favorites-header">
+                <h1>My Favorites</h1>
+                <span class="favorites-count" id="favorites-count">0 items</span>
+            </div>
+            
+            <div class="products-container" id="favorites-items">
+                <!-- Empty State -->
+                <div class="empty-favorites">
+                    <img src="./assets/icons/empty-fav.png" alt="Empty Favorites">
+                    <h3>Your Favorites is empty</h3>
+                    <p>You haven't added any products to favorites yet</p>
+                    <a href="products.html" class="shop-btn">Start Shopping</a>
+                </div>
+                <!-- Favorite products will appear here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Same footer as other pages -->
+    </footer>
+
+    <script type="module" src="./js/favorites.js"></script>
+</body>
+</html>

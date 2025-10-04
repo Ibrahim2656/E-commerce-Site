@@ -1,5 +1,5 @@
 import { getAllProducts } from "./api.js";
-import {} from "./utils.js";
+import { cartAdd, cartRemove, getCart ,showToast,updateCartCounter} from "./utils.js";
 
 async function initProductPage() {
   const products = await getAllProducts();
@@ -11,6 +11,7 @@ async function initProductPage() {
 
   if (product) {
     document.title = product.title;
+    updateCartCounter();//to update the counter
 
     // Images
     document.querySelector(".product-page-main-img").src = product.images[0];
@@ -82,6 +83,28 @@ async function initProductPage() {
         </div>
       `;
     });
+    //added in the cart
+    const addToCartBtn = document.querySelector(".btn-add-to-cart");
+    const cart = getCart();
+    if(cart.some(item=>item.id==product.id)){
+      addToCartBtn.textContent='Added'
+    }
+    else{
+      addToCartBtn.textContent = "Add to Cart";
+    }
+    addToCartBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); 
+      const cartNow=getCart();
+      const isInCart = cartNow.some(item => item.id === product.id);
+      if(isInCart){
+        cartRemove(product.id, addToCartBtn);
+        addToCartBtn.textContent = "Add to Cart";
+      }
+      else{
+        cartAdd(product, addToCartBtn);
+        addToCartBtn.textContent = "Added";
+      }
+  });
   } else {
     document.querySelector(
       ".product-page-container"

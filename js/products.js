@@ -6,6 +6,8 @@ import {
   PRODUCTS_PER_PAGE
 } from "./config.js";
 import { fetchProducts, getAllProducts } from "./api.js";
+import {cartAdd,cartRemove,updateCartCounter, 
+    getCart} from "./utils.js";
 
 const CATEGORY_MAP = {
   electronics: ["smartphones", "laptops", "tablets", "mobile-accessories"],
@@ -42,7 +44,8 @@ function getStars(rating) {
 function createProductCard(product, { showBadge = false }) {
   const card = document.createElement("div");
   card.className = "product-card";
-
+  const cart = getCart();
+  const isInCart = cart.some(item => item.id === product.id);
   card.innerHTML = `
     ${showBadge ? `<span class="product-badge">Best Seller</span>` : ""}
     <div class="product-image-container">
@@ -64,17 +67,29 @@ function createProductCard(product, { showBadge = false }) {
     </div>
     <div class="product-actions">
       <button class="btn-favorite"> <img src="./assets/icons/fav.png" alt="fav"></button>
-      <button class="btn-add-to-cart">Add to Cart </button>
+      <button class="btn-add-to-cart ">${isInCart?"Added":"Add to Cart"} </button>
     </div>
   `;
-  card.addEventListener("click", (e) => {
-    if (
-      e.target.closest(".btn-add-to-cart") ||
-      e.target.closest(".btn-favorite")
-    )
-      return;
-    window.location.href = `product.html?id=${product.id}`;
-  });
+  const addToCartBtn = card.querySelector(".btn-add-to-cart");
+
+  addToCartBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); 
+      const cartNow=getCart();
+      const isInCart = cartNow.some(item => item.id === product.id);
+      if(isInCart){
+        cartRemove(product.id, addToCartBtn);
+        addToCartBtn.textContent = "Add to Cart";
+      }
+      else{
+        cartAdd(product, addToCartBtn);
+        addToCartBtn.textContent = "Added";
+      }
+})
+    // Card Click - Go to Product Page
+    card.addEventListener("click", function() {
+        window.location.href = `product.html?id=${product.id}`;
+    });
+
   return card;
 }
 
@@ -311,6 +326,8 @@ function autoCheckCategoryFilter(categoryFromUrl){
 }
 
 document.addEventListener('DOMContentLoaded',async()=>{
+  updateCartCounter();
+  
   const container =document.getElementById("products-container")
   if(!container)return;
   const params= new URLSearchParams(window.location.search)
